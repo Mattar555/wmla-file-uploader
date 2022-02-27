@@ -1,0 +1,29 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+volume:
+  path: /tmp/
+
+redis:
+  poolConfig:
+    maxTotal: 128
+    maxIdle: 128
+    minIdle: 16
+    testOnBurrow: true
+    testOnReturn: true
+    testWhileIdle: true
+    blockWhenExhausted: true
+    minEvictableIdleTime: 60
+    timeBetweenEvictionRuns: 30
+    numTestsPerEviction: 3
+  info:
+    host: redis
+    port: 6379
+    timeout: 10
+    password: redis
+  search:
+    prefix: WLMA-
