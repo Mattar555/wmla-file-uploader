@@ -16,6 +16,19 @@ spec:
     resources: {}
     terminationMessagePath: /dev/termination-log
     terminationMessagePolicy: File
+    securityContext:
+      runAsUser: 1234
+      runAsGroup: 5678
+    volumeMounts:
+    - mountPath: /var/run/data
+      name: data
+  serviceAccountName: uploader-sa
+  securityContext:
+    fsGroup: 5555
+    supplementalGroups: [5777, 5888]
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: uploader-pvc
   restartPolicy: Always
   schedulerName: default-scheduler
-  securityContext: {}

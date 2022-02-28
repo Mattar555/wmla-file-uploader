@@ -6,7 +6,7 @@ spring:
       max-request-size: 100MB
 
 volume:
-  path: /tmp/
+  path: /var/run/data
 
 redis:
   poolConfig:
