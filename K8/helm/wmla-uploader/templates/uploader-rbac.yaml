@@ -1,0 +1,22 @@
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "wmla-uploader.name" . }}-role
+rules:
+  - apiGroups: ["security.openshift.io"]
+    resources: ["securitycontextconstraints"]
+    resourceNames: [{{ include "wmla-uploader.name" . }}-scc]
+    verbs: ["use"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "wmla-uploader.name" . }}-rolebinding
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "wmla-uploader.name" . }}-sa
+roleRef:
+  kind: Role
+  name: {{ include "wmla-uploader.name" . }}-role
+  apiGroup: rbac.authorization.k8s.io

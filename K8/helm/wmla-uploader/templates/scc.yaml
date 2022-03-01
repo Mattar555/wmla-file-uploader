@@ -1,0 +1,29 @@
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: {{ include "wmla-uploader.name" . }}-scc
+runAsUser:
+  type: MustRunAsRange
+  uidRangeMin: {{ .Values.uploader.securityContext.runAsUser.min }}
+  uidRangeMax: {{ .Values.uploader.securityContext.runAsUser.max }}
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: MustRunAs
+  ranges:
+  - min: {{ .Values.uploader.securityContext.fsGroup.min }}
+    max: {{ .Values.uploader.securityContext.fsGroup.max }}
+supplementalGroups:
+  type: MustRunAs
+  ranges:
+  - min: {{ .Values.uploader.securityContext.supplementalGroup.min }}
+    max: {{ .Values.uploader.securityContext.supplementalGroup.max }}
+allowHostPID: false
+allowHostIPC: false
+allowHostPorts: false
+allowHostNetwork: false
+readOnlyRootFilesystem: false
+allowHostDirVolumePlugin: false
+allowPrivilegedContainer: false
+allowPrivilegeEscalation: true
+
